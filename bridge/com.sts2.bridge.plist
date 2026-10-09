@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- OPT-IN bridge auto-start. Runs the keep-alive daemon at login so the bridge is always up
+     (and relaunches it if it ever dies). This auto-launches the GAME whenever Steam is running,
+     so only install it on a machine you dedicate to bridging. Edit ProgramArguments path first.
+       install:   cp bridge/com.sts2.bridge.plist ~/Library/LaunchAgents/ && launchctl load ~/Library/LaunchAgents/com.sts2.bridge.plist
+       uninstall: launchctl unload ~/Library/LaunchAgents/com.sts2.bridge.plist && rm ~/Library/LaunchAgents/com.sts2.bridge.plist -->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sts2.bridge</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>REPLACE_WITH_REPO_PATH/bridge/bridge_daemon.sh</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/sts2_bridge_daemon.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/sts2_bridge_daemon.log</string>
+</dict>
+</plist>

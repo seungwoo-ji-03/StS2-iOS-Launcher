@@ -1,0 +1,18 @@
+config_version=5
+
+[application]
+config/name="Slay the Spire 2"
+config/icon="res://icon.png"
+run/main_scene="res://loader.tscn"
+config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+
+[dotnet]
+project/assembly_name="sts2"
+
+[display]
+window/handheld/orientation=0
+window/energy_saving/keep_screen_on=true
+
+[rendering]
+textures/vram_compression/import_etc2_astc=true
+renderer/rendering_method="mobile"

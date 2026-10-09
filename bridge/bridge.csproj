@@ -1,0 +1,20 @@
+<Project Sdk="Godot.NET.Sdk/4.5.1">
+  <!-- Builds bridgemgr.dll, which the cecilpatch inject-bridge mode hooks into the desktop game.
+       Godot.NET.Sdk is required: its source generators wire up _Ready/_Process, and a plain
+       Microsoft.NET.Sdk build produces a Node whose callbacks never fire. -->
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <AssemblyName>bridgemgr</AssemblyName>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!-- GameLibs points at your copy of the game's desktop assemblies (sts2.dll, Steamworks.NET.dll),
+         which are not included in this repo. On macOS they are in
+         SlayTheSpire2.app/Contents/Resources/data_sts2_macos_arm64/ -->
+    <GameLibs Condition="'$(GameLibs)'==''">$(HOME)/sts2-build/gameapp/libs</GameLibs>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="sts2"><HintPath>$(GameLibs)/sts2.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Steamworks.NET"><HintPath>$(GameLibs)/Steamworks.NET.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>

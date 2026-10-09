@@ -1,0 +1,5 @@
+<Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
+  <Application>
+    <Assembly Name="sts2" Dynamic="Required All" />
+  </Application>
+</Directives>

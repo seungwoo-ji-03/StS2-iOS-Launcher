@@ -1,0 +1,23 @@
+iOS audio tuning for utopia-rise/fmod-gdextension (base commit b74dd11).
+Measured on iPhone 12 (FMOD getCPUUsage, same-build A/B, menu music): total audio CPU 3.04% -> 1.80%.
+
+diff --git a/src/fmod_server.cpp b/src/fmod_server.cpp
+index a28b0f3..196c3c8 100644
+--- a/src/fmod_server.cpp
++++ b/src/fmod_server.cpp
+@@ -178,6 +178,15 @@ void FmodServer::init(const Ref<FmodGeneralSettings>& p_settings) {
+         ERROR_CHECK(system->getCoreSystem(&coreSystem));
+     }
+ 
++#if defined(IOS_ENABLED)
++    // iOS: 24 kHz stereo mixer, 1024x4 DSP buffers, 12 real software voices. Set before initialize(),
++    // overriding the project's desktop-oriented format. FMOD's own iOS default is 24 kHz; running at
++    // 48 kHz roughly doubles mixer CPU on a phone speaker for no audible gain.
++    ERROR_CHECK(coreSystem->setSoftwareFormat(24000, FMOD_SPEAKERMODE_STEREO, 0));
++    ERROR_CHECK(coreSystem->setDSPBufferSize(1024, 4));
++    ERROR_CHECK(coreSystem->setSoftwareChannels(12));
++#endif
++
+     // editing advanced settings to set random seed before system initialization
+     FMOD_ADVANCEDSETTINGS advancedSettings = {};
+     advancedSettings.cbSize = sizeof(FMOD_ADVANCEDSETTINGS);

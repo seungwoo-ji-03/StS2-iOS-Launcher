@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>application-identifier</key><string>YOUR_TEAM_ID.com.example.sts2</string>
+  <key>com.apple.developer.team-identifier</key><string>YOUR_TEAM_ID</string>
+  <key>get-task-allow</key><true/>
+</dict></plist>

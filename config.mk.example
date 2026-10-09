@@ -1,0 +1,32 @@
+# Copy to config.mk (git-ignored) with `make config`, then fill in. Personal values stay on your Mac.
+
+# --- your game (from Steam) -------------------------------------------------------------------------
+GAME_APP     := $(HOME)/Library/Application Support/Steam/steamapps/common/Slay the Spire 2/SlayTheSpire2.app
+
+# --- tools --------------------------------------------------------------------------------------------
+# Godot 4.5.1 .NET (mono) editor binary, with the 4.5.1 mono export templates installed
+GODOT        := $(HOME)/Applications/Godot_mono.app/Contents/MacOS/Godot
+# unpacked "FMOD Engine" iOS package from fmod.com (contains api/core and api/studio)
+FMOD_IOS_SDK := $(HOME)/SDKs/fmod-ios
+# build outputs and caches (several GB: transcoded textures, pck, app)
+WORKDIR      := $(HOME)/sts2-build
+
+# --- signing / device ---------------------------------------------------------------------------------
+# Apple team ID: the OU field of your "Apple Development" certificate
+#   security find-certificate -c "Apple Development" -p | openssl x509 -noout -subject
+TEAM         := XXXXXXXXXX
+# signing identity (SHA-1 from `security find-identity -v -p codesigning`)
+SIGN_ID      := 0000000000000000000000000000000000000000
+# any reverse-DNS id you own, e.g. com.yourname.sts2
+BUNDLE       := com.example.sts2
+# device identifier from `xcrun devicectl list devices`
+DEV          := 00000000-0000-0000-0000-000000000000
+# optional: square PNG for the home-screen icon
+ICON         :=
+
+# --- multiplayer (optional) ---------------------------------------------------------------------------
+# MP=1 builds the iPhone for LAN / PC-bridge multiplayer (see docs/multiplayer-bridge-design.md)
+MP           := 0
+MP_JOIN      := 100.x.y.z
+MP_NETID     := 00000000000000000
+MP_NAME      :=

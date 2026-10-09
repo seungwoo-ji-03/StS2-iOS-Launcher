@@ -1,0 +1,59 @@
+<Project Sdk="Godot.NET.Sdk/4.5.1">
+  <!-- Stub Godot project whose iOS export compiles the GAME's own sts2.dll (gameapp/libs, from your Steam
+       install, patched by cecilpatch) into the NativeAOT app image. No game code lives in this repo. -->
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <Nullable>disable</Nullable>
+    <AssemblyName>sts2</AssemblyName>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!-- keep reflection metadata for the game's 600+ Godot script classes -->
+    <IlcTrimMetadata>false</IlcTrimMetadata>
+    <!-- the game uses reflection-based System.Text.Json (off by default under NativeAOT) -->
+    <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
+    <!-- phone memory: workstation, non-concurrent GC -->
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+  </PropertyGroup>
+  <!-- iOS release export: no DWARF for ILC (skips a ~260 MB dSYM and shortens the export). StripSymbols must
+       stay at its default (true): Godot's export requires a dSYM to create the xcframework.
+       Remove this block if you need symbolicated native crash reports. -->
+  <PropertyGroup Condition="'$(GodotTargetPlatform)' == 'ios' and '$(Configuration)' == 'ExportRelease'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <RuntimeHostConfigurationOption Include="System.GC.ConserveMemory" Value="9" Trim="false" />
+    <RuntimeHostConfigurationOption Include="System.GC.RetainVM" Value="false" Trim="false" />
+  </ItemGroup>
+  <ItemGroup>
+    <RdXmlFile Include="sts2_rd.xml" />
+  </ItemGroup>
+  <!-- game-specific assemblies (the iOS runtime pack provides the framework ones) -->
+  <ItemGroup>
+    <Reference Include="0Harmony"><HintPath>libs/0Harmony.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="MonoMod.Backports"><HintPath>libs/MonoMod.Backports.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="MonoMod.ILHelpers"><HintPath>libs/MonoMod.ILHelpers.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="Sentry"><HintPath>libs/Sentry.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="Steamworks.NET"><HintPath>libs/Steamworks.NET.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="SmartFormat"><HintPath>libs/SmartFormat.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="SmartFormat.ZString"><HintPath>libs/SmartFormat.ZString.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="JetBrains.Annotations"><HintPath>libs/JetBrains.Annotations.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="SharpGen.Runtime"><HintPath>libs/SharpGen.Runtime.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="SharpGen.Runtime.COM"><HintPath>libs/SharpGen.Runtime.COM.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="Vortice.DirectX"><HintPath>libs/Vortice.DirectX.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="Vortice.DXGI"><HintPath>libs/Vortice.DXGI.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="Vortice.Mathematics"><HintPath>libs/Vortice.Mathematics.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="System.IO.Hashing"><HintPath>libs/System.IO.Hashing.dll</HintPath><Private>true</Private></Reference>
+    <!-- in-app Steam Cloud sync (SyncManager) and runtime multiplayer config (MpConfig): `make syncmgr` -->
+    <Reference Include="syncmgr"><HintPath>libs/syncmgr.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="Google.Protobuf"><HintPath>libs/Google.Protobuf.dll</HintPath><Private>true</Private></Reference>
+  </ItemGroup>
+  <!-- ILC compiles obj/sts2.dll. Replace this project's empty stub with the game assembly before ILC reads
+       its inputs, so the native image contains the game. -->
+  <Target Name="InjectGameAsmBeforeIlc" BeforeTargets="ComputeIlcCompileInputs">
+    <Copy SourceFiles="libs/sts2.dll" DestinationFiles="$(IntermediateOutputPath)sts2.dll" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="false" />
+    <Message Importance="high" Text="[inject] game sts2.dll -> $(IntermediateOutputPath)sts2.dll (before ILC)" />
+  </Target>
+</Project>

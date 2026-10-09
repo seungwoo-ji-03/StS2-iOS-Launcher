@@ -1,0 +1,59 @@
+# personal settings
+config.mk
+
+# the game belongs to Mega Crit: never commit any of it
+*.pck
+*.dll
+*.exe
+*.bank
+*.fsb
+*.assets
+*.ctex
+gameapp/libs/
+*.ipa
+
+# personal data: saves, Steam login, signing material
+*.save
+*.save.backup
+*.run
+*.mcr
+steam_token.json
+token.json
+*.mobileprovision
+*.p12
+*.cer
+*.certSigningRequest
+save-backups/
+cloudsave/
+
+# build outputs (normally under WORKDIR, listed in case WORKDIR points into the repo)
+bin/
+obj/
+build/
+out/
+.godot/
+*.app/
+*.framework/
+*.xcframework/
+*.xcarchive/
+*.dSYM/
+*.o
+*.os
+*.nupkg
+*.log
+resign-tmp/
+traces/
+textures/
+natives/
+syncmgr-out/
+bridge-out/
+
+# OS / editors
+.DS_Store
+*.swp
+.idea/
+.vs/
+
+# python
+__pycache__/
+*.pyc

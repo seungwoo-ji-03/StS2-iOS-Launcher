@@ -1,0 +1,13 @@
+syntax = "proto2";
+package steamauth;
+option csharp_namespace = "SteamAuthProto";
+
+message CAuthentication_AccessToken_GenerateForApp_Request {
+  optional string refresh_token = 1;
+  optional fixed64 steamid = 2;
+  optional int32 renewal_type = 3 [default = 0];
+}
+message CAuthentication_AccessToken_GenerateForApp_Response {
+  optional string access_token = 1;
+  optional string refresh_token = 2;
+}
