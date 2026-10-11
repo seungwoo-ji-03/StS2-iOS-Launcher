@@ -5,10 +5,23 @@ the phone, offline, with Steam Cloud saves shared with your PC.
 
 [한국어 README](README.ko.md)
 
+<p align="center">
+  <a href="docs/media/gameplay.mp4"><img src="docs/media/combat.webp" width="720" alt="Slay the Spire 2 running on an iPhone 12: the first fight of a run"></a>
+</p>
+<p align="center"><sub>Running on an iPhone 12, captured through iPhone Mirroring.
+<a href="docs/media/gameplay.mp4">Full clip (50 s)</a>: launch, character select, map and the first fight.</sub></p>
+
+| | |
+|:---:|:---:|
+| <img src="docs/media/menu.jpg" alt="Main menu"> | <img src="docs/media/map.jpg" alt="Act 1 map"> |
+| Main menu | Map |
+| <img src="docs/media/combat.jpg" alt="Combat"> | <img src="docs/media/reward.jpg" alt="Card reward"> |
+| Combat | Card reward |
+
 > **Read this first.**
 > This repository contains **no part of Slay the Spire 2**: no game code, assets, audio or packs. It contains
 > only original build tooling. The tools work on the copy of the game **you bought on Steam**, on your own Mac,
-> to put it on your own iPhone.
+> to put it on your own iPhone. The screenshots and clip in `docs/media` are recordings of the author's own play.
 > - Unofficial. Not affiliated with, endorsed or supported by Mega Crit or Valve. Do not contact them about it.
 > - **Never share the app or .ipa you build.** It contains Mega Crit's game.
 > - Use at your own risk: no warranty (see [LICENSE](LICENSE)). Keep backups of your saves.

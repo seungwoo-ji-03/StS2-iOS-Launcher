@@ -5,10 +5,23 @@
 
 [English README](README.md)
 
+<p align="center">
+  <a href="docs/media/gameplay.mp4"><img src="docs/media/combat.webp" width="720" alt="iPhone 12에서 돌아가는 Slay the Spire 2: 첫 전투"></a>
+</p>
+<p align="center"><sub>iPhone 12 실기기 화면을 iPhone 미러링으로 녹화했습니다.
+<a href="docs/media/gameplay.mp4">전체 영상(50초)</a>: 앱 실행, 캐릭터 선택, 지도, 첫 전투.</sub></p>
+
+| | |
+|:---:|:---:|
+| <img src="docs/media/menu.jpg" alt="메인 메뉴"> | <img src="docs/media/map.jpg" alt="1막 지도"> |
+| 메인 메뉴 | 지도 |
+| <img src="docs/media/combat.jpg" alt="전투"> | <img src="docs/media/reward.jpg" alt="카드 보상"> |
+| 전투 | 카드 보상 |
+
 > **먼저 읽어 주세요.**
 > 이 저장소에는 **Slay the Spire 2의 어떤 부분도 들어 있지 않습니다.** 게임 코드, 에셋, 오디오, 팩 파일이 전혀 없고,
 > 직접 작성한 빌드 도구만 있습니다. 이 도구는 **본인이 Steam에서 구매한 게임 사본**을 본인의 Mac에서 가공해 본인의
-> iPhone에 설치하는 용도입니다.
+> iPhone에 설치하는 용도입니다. `docs/media`의 스크린샷과 영상은 작성자가 직접 플레이한 화면을 녹화한 것입니다.
 > - 비공식 프로젝트입니다. Mega Crit이나 Valve와 무관하며 승인·지원을 받지 않았습니다. 이 프로젝트 관련 문의를
 >   그쪽에 하지 마세요.
 > - **빌드한 앱이나 .ipa를 절대 공유하지 마세요.** Mega Crit의 게임이 들어 있습니다.
