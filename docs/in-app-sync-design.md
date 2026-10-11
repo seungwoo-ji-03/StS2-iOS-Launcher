@@ -4,6 +4,25 @@ The phone keeps Slay the Spire 2 saves in step with Steam Cloud by itself, so a 
 the phone and back. Code: `syncmgr/SyncManager.cs` (policy), `syncmgr/SteamCloudClient.cs` (network),
 `syncmgr/IosNative.cs` (iOS runtime calls). Tests: `syncmgr/tests` (`make test`).
 
+
+## For players
+
+- On launch, the phone brings the profile, progress and current run up to date **before the game reads them**.
+  It gives up after 8 seconds without network and starts with the saves on the phone.
+- When you leave the app, it uploads what changed.
+- Each file is compared with the version both sides last agreed on. A change on only one side wins.
+  Changes on both sides are compared by progress, and the losing copy is kept in `save-backups/` inside the app.
+- A run you finish on one device disappears on the other. Run history follows the game's own cloud limit: the
+  newest 100 runs are shared, and older ones stay on each device.
+- The Steam login is a refresh token stored in the app. You can revoke it any time from your Steam account's
+  authorized devices (Steam Guard settings), where it shows as `sts2ios`.
+
+The phone talks to Steam with a small custom client (`syncmgr/SteamCloudClient.cs`) that only reads and writes
+this game's cloud files. It is unofficial. Valve could change or block it, and using third-party clients is at
+your own risk under the Steam Subscriber Agreement.
+
+No cable needed day to day. `make sync-pull` and `make sync-push` remain as desktop fallbacks.
+
 ## Constraints
 
 - **NativeAOT.** Godot 4.5's iOS export compiles all managed code ahead of time; there is no JIT and no
